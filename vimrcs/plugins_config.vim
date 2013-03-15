@@ -77,7 +77,8 @@ set grepprg=/bin/grep\ -nH
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark 
 map <leader>nf :NERDTreeFind<cr>
-
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd vimenter * NERDTree
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => surround.vim config
@@ -85,3 +86,33 @@ map <leader>nf :NERDTreeFind<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
+
+""""""""""""""""""""""
+" => vimwiki
+""""""""""""""""""""""
+set nocompatible
+let g:vimwiki_list = [{'path':'/Users/Keith/Documents/workspace/wiki/',
+			\ 'path_html':'/Users/Keith/Documents/workspace/octopress_keithblog/source/wiki',
+			\ 'auto_export': 1}]
+
+""""""""""""""""""""""
+" => zen-coding
+""""""""""""""""""""""
+let g:user_zen_leader_key = '<leader>z'
+let g:use_zen_complete_tag = 1
+let g:user_zen_mode='a'    "enable all function in all mode.
+let g:user_zen_settings = {
+\  'html' : {
+\    'indentation' : '  '
+\  },
+\}
+""""""""""""""""""""""
+" => coffescript conf
+""""""""""""""""""""""
+au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+""""""""""""""""""""""
+" => html conf
+""""""""""""""""""""""
+au BufNewFile,BufReadPost *.html setl shiftwidth=2 expandtab
+
